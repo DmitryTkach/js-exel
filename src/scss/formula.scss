@@ -1,0 +1,24 @@
+@import "mixins";
+@import "variables";
+
+.exel-formula{
+  @include flexVcenter();
+  padding:5px 10px;
+  & .formula-label{
+    @include flexVcenter();
+    font-style:italic;
+    font-size:20px;
+    color: grey;
+    border-right: 1px solid $grey;
+    padding-right:10px;
+  }
+  & .formula-input{
+    @include flexVcenter();
+    width:100%;
+    padding:5px 10px;
+    &:focus{
+      outline: 0;
+      box-shadow:none;
+    }
+  }
+}

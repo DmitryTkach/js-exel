@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Js exel</title>
+
+</head>
+<body>
+<section>
+    <div class="exel">
+        <div class="exel-head-line">
+            <!-- Header -->
+            <div class="exel-header">
+                <div class="title">
+                    <span class="material-icons icon">description</span>
+                    <input type="text" class="input" value="Новая таблица" placeholder="Новая таблица">
+                </div>
+                <div class="controls">
+                    <button class="btn">
+                        <span class="material-icons icon">delete</span>
+                    </button>
+                    <button class="btn">
+                        <span class="material-icons icon">exit_to_app</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Toolbar -->
+            <div class="exel-toolbar">
+                <div class="group">
+                    <button class="btn btn-sm">
+                        <span class="material-icons icon">format_align_left</span>
+                    </button>
+                    <button class="btn btn-sm">
+                        <span class="material-icons icon">format_align_justify</span>
+                    </button>
+                    <button class="btn btn-sm">
+                        <span class="material-icons icon">format_align_right</span>
+                    </button>
+                </div>
+                <div class="group">
+                    <button class="btn btn-sm">
+                        <span class="material-icons icon">format_bold</span>
+                    </button>
+                    <button class="btn btn-sm">
+                        <span class="material-icons icon">format_italic</span>
+                    </button>
+                    <button class="btn btn-sm">
+                        <span class="material-icons icon">format_underline</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Formula -->
+            <div class="exel-formula">
+                <div class="formula-label">Fx</div>
+                <div class="formula-input" contenteditable="true"></div>
+            </div>
+        </div>
+
+        <div class="exel-table">
+            <div class="row table-header">
+                <div class="row-id"></div>
+                <div class="row-data">
+                    <div class="cell">A</div>
+                    <div class="cell">B</div>
+                    <div class="cell">C</div>
+                    <div class="cell">D</div>
+                    <div class="cell">E</div>
+                    <div class="cell">A</div>
+                    <div class="cell">B</div>
+                    <div class="cell">C</div>
+                    <div class="cell">D</div>
+                    <div class="cell">E</div>
+                    <div class="cell">A</div>
+                    <div class="cell">B</div>
+                    <div class="cell">C</div>
+                    <div class="cell">D</div>
+                    <div class="cell">E</div>
+                    <div class="cell">A</div>
+                    <div class="cell">B</div>
+                    <div class="cell">C</div>
+                    <div class="cell">D</div>
+                    <div class="cell">E</div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="row-id">1</div>
+                <div class="row-data">
+                    <div class="cell selected" contenteditable="true">D1</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D3</div>
+                    <div class="cell" contenteditable="true">D4</div>
+                    <div class="cell" contenteditable="true">D5</div>
+                    <div class="cell" contenteditable="true">D1</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D1</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D1</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row-id">2</div>
+                <div class="row-data">
+                    <div class="cell" contenteditable="true">D1</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D1</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D1</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D1</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                    <div class="cell" contenteditable="true">D2</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
