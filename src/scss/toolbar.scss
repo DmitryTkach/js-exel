@@ -1,0 +1,23 @@
+@import "mixins";
+@import "variables";
+
+.exel-toolbar{
+  padding :10px 0;
+  border-top: 1px solid $grey;
+  border-bottom: 1px solid $grey;
+  display :flex;
+  & .group:first-child{
+    border-left:none;
+  }
+  & .group:last-child{
+    border-right:none;
+  }
+
+}
+.group{
+  padding :0 10px;
+  border-right: 1px solid $grey;
+  & .btn .icon{
+    font-size:18px;
+  }
+}

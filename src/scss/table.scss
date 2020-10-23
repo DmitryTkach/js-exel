@@ -1,0 +1,64 @@
+@import "mixins";
+@import "variables";
+
+.exel-table{
+  border-top: 1px solid #c3c3c3;
+  padding-bottom: 2px;
+  overflow: auto;
+  height: calc(100vh - 154px);
+  .row{
+    display:flex;
+    flex-direction: row;
+    min-height: 24px;
+    & .row-id{
+      min-width:40px;
+      width:40px;
+      border: 1px solid $grey;
+      border-top:none;
+      background: #efefef;
+      @include flexCenter();
+    }
+    &.table-header{
+      & .row-data{
+        background:$light;
+      }
+      & .cell{
+       color:#333;
+        border: 1px solid #c3c3c3;
+        border-top:none;
+        border-left:none;
+        @include flexCenter();
+      }
+      & .row-id{
+        border-color: #c3c3c3;
+        border-right:3px solid  #c3c3c3;
+        border-bottom:3px solid  #c3c3c3;
+      }
+    }
+
+    & .row-data{
+      display:flex;
+      @include flexCenter();
+    }
+    & .cell{
+      min-width:40px;
+      height: 100%;
+      width:120px;
+      padding:5px;
+      border: 1px solid $grey;
+      border-top:none;
+      border-left:none;
+      text-align:left;
+      @include flexVcenter();
+
+      &:focus{
+        outline: 0;
+      }
+      &.selected{
+        border:0;
+        outline: 2px solid $green;
+        z-index: 1;
+      }
+    }
+  }
+}

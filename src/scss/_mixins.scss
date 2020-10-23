@@ -1,0 +1,50 @@
+@mixin btn($bgColor){
+  display: inline-flex;
+  align-items: center;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  background:$bgColor;
+  cursor: pointer;
+  transition: all .15s ease-in-out;
+  &:hover{
+    background:#e5e5e5;
+  }
+  &:focus, &:focus {
+    outline: 0;
+    box-shadow:none;
+  }
+  &.btn-success{
+    color:#ffffff;
+    &:hover{
+      background:#2f713e;
+    }
+  }
+  &.btn-danger{
+    color:#ffffff;
+    &:hover{
+      background:#2f713e;
+    }
+  }
+  &.btn-sm{
+    padding: .175rem .25rem;
+  }
+
+}
+
+@mixin flexVcenter(){
+  display:flex;
+  align-items: center;
+}
+@mixin flexCenter(){
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}

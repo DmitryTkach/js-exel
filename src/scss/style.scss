@@ -1,5 +1,41 @@
-$grey: #ccc;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import "mixins";
+@import "variables";
+@import "~normalize.css";
+@import "header";
+@import "toolbar";
+@import "formula";
+@import "table";
+@import "dashboard";
 
-body{
-  background:$grey;
+*{
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
 }
+body{
+  font-family: 'Roboto', sans-serif;
+  font-size:12px;
+}
+
+.container{
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.btn{
+    @include btn($light);
+    &.btn-success{
+      @include btn($green);
+    }
+    &.btn-success{
+      @include btn($red);
+    }
+}
+
+.exel{
+  height:100%;
+  max-width:100%;
+  padding-top:154px;
+}
+

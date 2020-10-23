@@ -1,0 +1,49 @@
+@import "mixins";
+@import "variables";
+
+.exel-head-line{
+  position:fixed;
+  width:100%;
+  background:#fff;
+  top:0;
+  left:0;
+  z-index:3;
+}
+.exel-header{
+  display:flex;
+  justify-content: space-between;
+  padding:15px 5px;
+  .title{
+    display:flex;
+    align-items: center;
+    & .input{
+      margin:5px 0 0 5px;
+      border:none;
+      padding:5px;
+      font-size:16px;
+      &:focus{
+        outline-color:$green;
+      }
+    }
+    & .icon{
+      font-size:40px;
+      color:$green;
+    }
+  }
+  .controls{
+    display:flex;
+    align-items: center;
+    margin-right:10px;
+    & .btn{
+      margin-left:15px;
+      &:active{
+        color:$red;
+        transition: none;
+      }
+    }
+    & .icon{
+      font-size:20px;
+    }
+  }
+
+}
