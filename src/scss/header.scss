@@ -1,15 +1,8 @@
 @import "mixins";
 @import "variables";
 
-.exel-head-line{
-  position:fixed;
-  width:100%;
-  background:#fff;
-  top:0;
-  left:0;
-  z-index:3;
-}
 .exel-header{
+  @include position(0);
   display:flex;
   justify-content: space-between;
   padding:15px 5px;

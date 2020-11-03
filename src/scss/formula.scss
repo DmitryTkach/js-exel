@@ -2,6 +2,7 @@
 @import "variables";
 
 .exel-formula{
+  @include position(118px);
   @include flexVcenter();
   padding:5px 10px;
   & .formula-label{
