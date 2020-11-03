@@ -2,6 +2,7 @@
 @import "variables";
 
 .exel-table{
+  @include position(151px);
   border-top: 1px solid #c3c3c3;
   padding-bottom: 2px;
   overflow: auto;
@@ -19,6 +20,9 @@
       @include flexCenter();
     }
     &.table-header{
+      padding:0;
+      margin-top:0;
+
       & .row-data{
         background:$light;
       }

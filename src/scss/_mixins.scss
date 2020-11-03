@@ -1,3 +1,9 @@
+@mixin position($val){
+  position:absolute;
+  width:100%;
+  top:$val;
+  left:0;
+}
 @mixin btn($bgColor){
   display: inline-flex;
   align-items: center;
