@@ -9,7 +9,10 @@ export function createTable(rowsCount = 15){
     function createHeader(codes){
         let headers = []
         for (let i = 0; i < cellsCount; i++){
-            headers.push(`<div class="cell">${String.fromCharCode(codes.A+i)}</div>`)
+            headers.push(`<div class="cell" data-type="column" data-position="${i}">
+                            ${String.fromCharCode(codes.A+i)}
+                            <div class="cell-resizer" data-resize="column"></div>
+                          </div>`)
         }
         return `
         <div class="row table-header">
@@ -22,8 +25,11 @@ export function createTable(rowsCount = 15){
     function createRows(rowsCount){
         const rows = new Array(rowsCount).fill('').map((_, index) => {
             return `
-            <div class="row">
-                <div class="row-id">${index+1}</div>
+            <div class="row" data-type="row" data-position="${index}">
+                <div class="row-id">
+                    ${index+1}
+                    <div class="cell-resizer" data-resize="row"></div>
+                    </div>
                     <div class="row-data">${ createCells(cellsCount) }</div>
                 </div>
             </div>
@@ -34,7 +40,7 @@ export function createTable(rowsCount = 15){
 
     function createCells(cellsCount){
         const cells = new Array(cellsCount).fill('').map((_, index) => {
-            return `<div class="cell" contenteditable="true"></div>`
+            return `<div class="cell" contenteditable="true" data-type="cell" data-position="${index}"></div>`
         })
         return cells.join('')
     }
