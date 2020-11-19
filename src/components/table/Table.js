@@ -1,27 +1,115 @@
 import {ExelComponent} from "@core/ExelComponent";
 import {createTable} from "@src/components/table/table.template";
 import {tableResize} from "@src/components/table/table.resize";
+import {TableSelections} from "@src/components/table/TableSelections";
+import {isCell, getSelectedItems, getSelectedRows, nextSelector} from "@src/components/table/table.functions";
+import {$} from "@core/Dom"
+
 
 
 export class Table extends ExelComponent{
-    constructor($root) {
+    constructor($root, options) {
         super($root, {
             name: 'table',
-            listeners: ['mousedown']
+            listeners: ['mousedown', 'keyup', 'keydown', 'input'],
+            ...options
+        })
+        this.$root = $root
+        this.rowsCount = 20
+    }
+
+
+    prepare() {
+        this.selection = new TableSelections()
+    }
+
+    init(){
+        super.init()
+        const $baseCell = this.root.find('[data-id="0:0"]')
+
+        this.selection.select($baseCell)
+        this.emit('tableSelectCell', $baseCell)
+
+        this.subscribe('formulaInput', (text) => {
+            this.selection.current.text(text)
         })
 
-        this.$root = $root
+        this.subscribe('formulaEnter', () => {
+            this.selection.current.focus()
+        })
 
-       
+        this.subscribe('Tab', () => {
+            const $nextCell = this.selection.current.next()
+            this.selection.select($nextCell)
+            this.emit('tableSelectCell', $nextCell)
+
+        })
+    }
+
+    onInput(event){
+        if(event.target.dataset.type === 'cell'){
+            this.emit('cellInput', $(event.target))
+
+        }
+    }
+
+    onKeydown(event) {
+        if (event.key === 'Tab') {
+            event.preventDefault()
+            this.emit('Tab')
+        }
+    }
+
+    onKeyup(event){
+        const keys = ['ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowLeft', 'Enter']
+        const {key} = event
+
+        if(keys.includes(key)) {
+            event.preventDefault()
+            const current = this.selection.current.dataId(true)
+            const $nextCell = this.root.find(nextSelector(current.row, current.cell, key, this.rowsCount))
+            this.selection.select($nextCell)
+            this.emit('tableSellectCell', $nextCell)
+        }
 
     }
 
-    /********** Resize column ***********/
     onMousedown(event){
         tableResize(event, this.$root)
+
+        if (isCell(event)){
+            /*** Group selection ***/
+            document.onmousemove = (event) => {if (isCell(event)) this.groupSelection(event)}
+            document.onmouseup = (event) =>  document.onmousemove = null
+
+            if(event.shiftKey){
+                this.groupSelection(event)
+                document.onkeypress = (event) => {
+                    this.currentCell.focus()
+                }
+            }else{
+                /*** Single selection ***/
+                this.selection.select($(event.target))
+                this.emit('tableSellectCell', $(event.target))
+                document.onkeypress = null
+            }
+
+        }
     }
 
+     groupSelection(event){
+        const current = this.selection.current.dataId(true)
+        const target = $(event.target).dataId(true )
+        const $cells = getSelectedItems(current, target).map((id) => this.root.find(`[data-id="${id}"]`))
+        const $rows = getSelectedRows(current, target).map((id) => this.root.find(`[data-id="${id}"]`))
+        this.selection.selectGroup($cells, $rows)
+        this.currentCell = this.root.find(`[data-id="${current.row}:${current.cell}"]`)
+     }
+
+
+
     toHtml() {
-        return createTable(20)
+        return createTable(this.rowsCount)
     }
+
 }
