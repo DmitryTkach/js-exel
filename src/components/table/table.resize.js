@@ -26,7 +26,7 @@ export function tableResize(event, $root) {
 
         /********** MOUSE UP ***********/
         document.onmouseup = () => {
-            const position = $resizeEl.$el.dataset.position
+            const position = $resizeEl.$el.dataset.cell
             $resizer.removeClass('active')
             document.onmousemove = null
             document.onmouseup = null
@@ -35,8 +35,7 @@ export function tableResize(event, $root) {
                 const cells = $root.all("[data-type='cell']")
                 $resizeEl.css({width:`${newSize}px`})
                 cells.forEach((cell) => {
-                    const cellPosition = cell.dataset.position
-                    if (cellPosition === position) $(cell).css({width: `${newSize}px`})
+                    if (cell.dataset.cell === position) $(cell).css({width: `${newSize}px`})
                 })
             }
             else $resizeEl.css({height: `${newSize}px`})

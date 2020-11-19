@@ -10,6 +10,14 @@ export class Dom{
         }
         return this.$el.innerHTML.trim()
     }
+    text(text){
+        if (typeof text === 'string'){
+            this.$el.textContent = text
+            return this
+        }
+
+        return this.$el.textContent.trim()
+    }
 
     clear(){
         this.html('')
@@ -18,6 +26,10 @@ export class Dom{
 
     all(selector){
         return this.$el.querySelectorAll(selector)
+    }
+
+    next(){
+        return $(this.$el.nextSibling)
     }
 
     append(node){
@@ -38,21 +50,40 @@ export class Dom{
         return this.$el.getBoundingClientRect()
     }
 
-    addClass(classes){
-        if (typeof classes !== 'string') throw new Error('"addClass method" - css class names must be a string')
-        this.$el.classList.add(classes)
-        return this
-    }
-    removeClass(classes){
-        if (typeof classes !== 'string') throw new Error('"removeClass method" - css class names must be a string')
-        this.$el.classList.remove(classes)
-        return this
+    data(name){
+        return this.$el.dataset[name]
     }
 
+    dataId(parse){
+        if(parse){
+            const parsed = this.dataId().split(':')
+            return { row: +parsed[0], cell: +parsed[1] }
+        }
+        return this.$el.dataset.id
+    }
+
+    addClass(...args){
+        args.forEach((className)=>{
+            if (typeof className !== 'string') throw new Error('"removeClass method" - css class names must be a string')
+            this.$el.classList.add(className)
+        })
+        return this
+    }
+    removeClass(...args){
+        args.forEach((className)=>{
+            if (typeof className !== 'string') throw new Error('"removeClass method" - css class names must be a string')
+            this.$el.classList.remove(className)
+        })
+        return this
+    }
     css(styles){
         if (typeof styles !== 'object') throw new Error('"css method" - styles data must be in object type')
         Object.keys(styles).forEach((key) => this.$el.style[key] = styles[key])
         return this
+    }
+
+    find(selector){
+        return $(this.$el.querySelector(selector))
     }
 
     on(event, callback){
@@ -61,6 +92,12 @@ export class Dom{
     off(event, callback){
         this.$el.removeEventListener(event, callback)
     }
+
+    focus(){
+        this.$el.focus()
+        return this
+    }
+
 
 }
 

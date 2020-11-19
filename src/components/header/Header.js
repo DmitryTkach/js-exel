@@ -1,9 +1,10 @@
 import {ExelComponent} from "@core/ExelComponent";
 
 export class Header extends ExelComponent{
-    constructor($root) {
+    constructor($root, options) {
         super($root, {
              name: 'header',
+            ...options
             // listeners: ['input']
         })
     }
