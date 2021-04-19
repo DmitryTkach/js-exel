@@ -4,6 +4,7 @@ import {tableResize} from "@src/components/table/table.resize";
 import {TableSelections} from "@src/components/table/TableSelections";
 import {isCell, getSelectedItems, getSelectedRows, nextSelector} from "@src/components/table/table.functions";
 import {$} from "@core/Dom"
+import * as actions from "@src/redux/actions";
 
 
 
@@ -32,6 +33,12 @@ export class Table extends ExelComponent{
 
         this.subscribe('formulaInput', (text) => {
             this.selection.current.text(text)
+            const data = {
+                currentText:text,
+                id: this.selection.current.data('id'),
+                value: text
+            }
+            this.dispatch(actions.textAction(data))
         })
 
         this.subscribe('formulaEnter', () => {
@@ -42,14 +49,21 @@ export class Table extends ExelComponent{
             const $nextCell = this.selection.current.next()
             this.selection.select($nextCell)
             this.emit('tableSelectCell', $nextCell)
-
         })
+
+
     }
 
     onInput(event){
         if(event.target.dataset.type === 'cell'){
             this.emit('cellInput', $(event.target))
-
+            const currentCell = this.selection.current
+            const data = {
+                currentText: this.selection.current.text(),
+                id:currentCell.data('id'),
+                value:currentCell.html()
+            }
+            this.dispatch(actions.textAction(data))
         }
     }
 
@@ -69,14 +83,17 @@ export class Table extends ExelComponent{
             const current = this.selection.current.dataId(true)
             const $nextCell = this.root.find(nextSelector(current.row, current.cell, key, this.rowsCount))
             this.selection.select($nextCell)
-            this.emit('tableSellectCell', $nextCell)
+            this.emit('tableSelectCell', $nextCell)
         }
 
     }
 
+    async resize(event){
+        const data = await tableResize(event, this.$root)
+        this.dispatch(actions.resizeAction(data))
+    }
     onMousedown(event){
-        tableResize(event, this.$root)
-
+        this.resize(event, this.$root)
         if (isCell(event)){
             /*** Group selection ***/
             document.onmousemove = (event) => {if (isCell(event)) this.groupSelection(event)}
@@ -90,7 +107,7 @@ export class Table extends ExelComponent{
             }else{
                 /*** Single selection ***/
                 this.selection.select($(event.target))
-                this.emit('tableSellectCell', $(event.target))
+                this.emit('tableSelectCell', $(event.target))
                 document.onkeypress = null
             }
 
@@ -109,7 +126,7 @@ export class Table extends ExelComponent{
 
 
     toHtml() {
-        return createTable(this.rowsCount)
+        return createTable(this.rowsCount, this.store.getState())
     }
 
 }

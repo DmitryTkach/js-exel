@@ -18,7 +18,13 @@
 .group{
   padding :0 10px;
   border-right: 1px solid $grey;
-  & .btn .icon{
-    font-size:18px;
+  & .btn{
+    margin-right:5px;
+    &.active{
+      background: rgba(32, 164, 100, 0.1);
+    }
+    & .icon{
+      font-size:18px;
+    }
   }
 }

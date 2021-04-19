@@ -1,5 +1,6 @@
 import {ExelComponent} from "@core/ExelComponent";
 import {$} from "@core/Dom"
+import * as actions from "@src/redux/actions";
 
 export class Formula extends ExelComponent{
     constructor($root, options) {
@@ -9,6 +10,7 @@ export class Formula extends ExelComponent{
             ...options
         })
         this.root = $root
+
     }
     toHtml() {
         return `
@@ -25,24 +27,22 @@ export class Formula extends ExelComponent{
             formulaInput.text($cell.text())
         })
 
+
         this.subscribe('cellInput', ($cell) => {
             formulaInput.text($cell.text())
+            console.log('formula update')
         })
+
     }
 
-    onInput(event){
+    onInput(event) {
         this.emit('formulaInput', $(event.target).text())
     }
 
     onKeydown(event){
-        event.preventDefault()
         if(event.key === 'Enter') this.emit('formulaEnter')
         if(event.key === 'Tab') this.emit('Tab')
     }
-
-
-
-
 
 
 }
