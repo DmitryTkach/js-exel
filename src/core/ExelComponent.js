@@ -4,8 +4,10 @@ export class ExelComponent extends Listener{
     constructor($root, options = {}) {
         super($root, options.listeners,  options.name)
         this.emitter = options.emitter
+        this.store = options.store
         this.prepare()
         this.describers = []
+        this.storeSub = null
     }
 
     prepare(){
@@ -21,14 +23,22 @@ export class ExelComponent extends Listener{
     emit(event, ...args){
         this.emitter.emit(event, ...args)
     }
+
     //Subscribe
     subscribe(event, fn){
         const describe = this.emitter.subscribe(event, fn)
         this.describers.push(describe)
     }
 
+    //Dispatch redux actions
+    dispatch(action){
+        this.store.dispatch(action)
+    }
 
-
+    //Subscribe redux actions
+    stateSubscribe(fn){
+        this.storeSub = this.store.subscribe(fn)
+    }
 
     toHtml(){
         return ''
@@ -39,6 +49,7 @@ export class ExelComponent extends Listener{
         this.describers.forEach((describe) => {
             describe()
         })
+        this.storeSub.unsubscribe()
     }
 
 }

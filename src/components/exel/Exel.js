@@ -2,16 +2,18 @@ import {$} from "@core/Dom"
 import {Emitter} from "@core/Emitter";
 
 export class Exel{
-    constructor(selector, options) {
+    constructor(selector, options, store) {
         this.$app = $(selector)
-        this.components = options || []
+        this.components = options.components || []
         this.emiter = new Emitter()
+        this.store = options.store
     }
 
     getBase(){
         const $main = $.create('div', 'exel')
         const componentOptions = {
-            emitter: this.emiter
+            emitter: this.emiter,
+            store: this.store
         }
         this.instances = []
         this.components.forEach((element) => {

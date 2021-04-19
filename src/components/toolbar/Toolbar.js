@@ -1,5 +1,5 @@
 import {ExelComponent} from "@core/ExelComponent";
-
+import {generateToolbar} from "@src/components/toolbar/toolbarTemplate";
 export class Toolbar extends ExelComponent{
     constructor($root, options) {
         super($root, {
@@ -11,35 +11,11 @@ export class Toolbar extends ExelComponent{
 
 
     onClick(event){
-        if(event.target.classList.contains('iconBtn')) console.log(event.target)
+        if(event.target.dataset.type === "button") console.log(event.target.dataset.action)
     }
 
 
     toHtml() {
-        return `
-            <!-- Toolbar -->
-            <div class="group">
-                <button class="btn btn-sm">
-                    <span class="material-icons icon iconBtn">format_align_left</span>
-                </button>
-                <button class="btn btn-sm">
-                    <span class="material-icons icon iconBtn">format_align_justify</span>
-                </button>
-                <button class="btn btn-sm">
-                    <span class="material-icons icon iconBtn">format_align_right</span>
-                </button>
-            </div>
-            <div class="group">
-                <button class="btn btn-sm">
-                    <span class="material-icons icon">format_bold</span>
-                </button>
-                <button class="btn btn-sm">
-                    <span class="material-icons icon">format_italic</span>
-                </button>
-                <button class="btn btn-sm">
-                    <span class="material-icons icon">format_underline</span>
-                </button>
-            </div>
-        `
+        return generateToolbar()
     }
 }

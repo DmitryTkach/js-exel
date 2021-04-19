@@ -40,7 +40,6 @@ export function nextSelector(rowId, cellId, key, rowsCount){
             break
         case 'ArrowRight':
             cellId = cellId + 1 > maxCell ? maxCell : cellId + 1
-            console.log(maxCell, cellId)
             break
         case 'ArrowDown':
         case 'Enter':
