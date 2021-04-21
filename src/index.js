@@ -1,32 +1,13 @@
 import './scss/style.scss'
-import {Exel} from "@src/components/exel/Exel"
-import {Header} from "@src/components/header/Header"
-import {Formula} from "@src/components/formula/Formula"
-import {Toolbar} from "@src/components/toolbar/Toolbar"
-import {Table} from "@src/components/table/Table"
-import {createStore} from "@core/createStore"
-import {rootReducer} from "@src/redux/rootReducer";
-import {storage} from "@core/utils";
-import {initState} from "@src/redux/initState";
+import {Router} from "@core/router/Router";
+import {Dashboard} from "@src/pages/Dashboard";
+import {ExelPage} from "@src/pages/ExelPage";
 
-const defaultState = initState()
-// Redux store
-const store = createStore(rootReducer, defaultState)
-
-store.subscribe((state)=>{
-    storage('excel-state', state)
-    console.log(state, 'state index')
+// Router
+const router = new Router('#app', {
+    dashboad: Dashboard,
+    exel: ExelPage
 })
-const excel = new Exel('#app', {
-    components:[{component: Header, className:'exel-header'},
-        {component: Toolbar, className:'exel-toolbar'},
-        {component: Formula, className:'exel-formula'},
-        {component: Table, className:'exel-table'}],
-    store
-    }
-
-)
 
 
-excel.render()
 

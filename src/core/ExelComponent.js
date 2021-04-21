@@ -49,7 +49,7 @@ export class ExelComponent extends Listener{
         this.describers.forEach((describe) => {
             describe()
         })
-        this.storeSub.unsubscribe()
+        if(this.storeSub) this.storeSub.unsubscribe()
     }
 
 }

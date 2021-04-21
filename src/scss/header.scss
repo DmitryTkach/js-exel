@@ -30,6 +30,7 @@
     margin-right:10px;
     & .btn{
       margin-left:15px;
+      text-decoration: none;
       &:active{
         color:$red;
         transition: none;
